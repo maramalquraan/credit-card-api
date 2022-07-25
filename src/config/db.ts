@@ -21,14 +21,22 @@ const dbConnect = async () => {
 };
 
 const dbClose = async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
+   try {
+    await mongoose.disconnect();
+    await mongoServer.stop();
+  } catch (error) {
+    console.log("Closing DB connection is failed::", error);
+  }
 };
 
 const dbClear = async () => {
-  const collections = mongoose.connection.collections;
-  for (const key in collections) {
-    await collections[key].deleteMany({});
+  try{
+    const collections = mongoose.connection.collections;
+    for (const key in collections) {
+      await collections[key].deleteMany({});
+    }
+  } catch (error) {
+    console.log("Clearing DB collections is failed::", error);
   }
 };
 
