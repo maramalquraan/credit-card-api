@@ -28,5 +28,5 @@ export const isLuhn = (cardNumber: string) => {
     notSkip = !notSkip;
   }
 
-  return sum % 10 == 0 ? true : false;
+  return sum % 10 == 0;
 };
